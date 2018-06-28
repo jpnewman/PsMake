@@ -32,7 +32,7 @@ Describe "Package-VSProject" {
         Package-VsProject 'abc.csproj'
 
         $capturedCalls.Count | Should Be 1
-        $capturedCalls[0] | %{$_} | Should Be @($Context.NuGetExe,'pack', 'abc.csproj', '-Prop', 'Configuration=Release', '-Prop', 'Platform=AnyCPU', '-NonInteractive', '-Output', '.', '-IncludeReferencedProjects')
+        $capturedCalls[0] | %{$_} | Should Be @($Context.NuGetExe,'pack', 'abc.csproj', '-Prop', 'Configuration=Release', '-Prop', 'Platform=AnyCPU', '-NonInteractive', '-OutputDirectory', '.', '-IncludeReferencedProjects')
     }
 
     It "It should call Nuget with specified parameters" {
@@ -40,7 +40,7 @@ Describe "Package-VSProject" {
         Package-VsProject 'my project.csproj' -Configuration 'Debug' -IncludeReferencedProjects $false -Symbols $true -Version '3.2.1' -Output 'my folder' -Platform 'x86'
 
         $capturedCalls.Count | Should Be 1
-        $capturedCalls[0] | %{$_} | Should Be @($Context.NuGetExe,'pack', 'my project.csproj', '-Prop', 'Configuration=Debug', '-Prop', 'Platform=x86', '-NonInteractive', '-Output', 'my folder', '-Symbols', '-Version', '3.2.1')
+        $capturedCalls[0] | %{$_} | Should Be @($Context.NuGetExe,'pack', 'my project.csproj', '-Prop', 'Configuration=Debug', '-Prop', 'Platform=x86', '-NonInteractive', '-OutputDirectory', 'my folder', '-Symbols', '-Version', '3.2.1')
     }
 	
 	It "It should pipe project paths" {
@@ -53,8 +53,8 @@ Describe "Package-VSProject" {
         List-Projects | Package-VsProject
 
         $capturedCalls.Count | Should Be 2
-        $capturedCalls[0] | %{$_} | Should Be @($Context.NuGetExe,'pack', 'a.csproj', '-Prop', 'Configuration=Release', '-Prop', 'Platform=AnyCPU', '-NonInteractive', '-Output', '.', '-IncludeReferencedProjects')
-		$capturedCalls[1] | %{$_} | Should Be @($Context.NuGetExe,'pack', 'b.csproj', '-Prop', 'Configuration=Release', '-Prop', 'Platform=AnyCPU', '-NonInteractive', '-Output', '.', '-IncludeReferencedProjects')
+        $capturedCalls[0] | %{$_} | Should Be @($Context.NuGetExe,'pack', 'a.csproj', '-Prop', 'Configuration=Release', '-Prop', 'Platform=AnyCPU', '-NonInteractive', '-OutputDirectory', '.', '-IncludeReferencedProjects')
+		$capturedCalls[1] | %{$_} | Should Be @($Context.NuGetExe,'pack', 'b.csproj', '-Prop', 'Configuration=Release', '-Prop', 'Platform=AnyCPU', '-NonInteractive', '-OutputDirectory', '.', '-IncludeReferencedProjects')
     }
 }
 
@@ -71,7 +71,7 @@ Describe "Package-DeployableNuSpec" {
         Package-DeployableNuSpec 'abc.nuspec'
 
         $capturedCalls.Count | Should Be 1
-        $capturedCalls[0] | %{$_} | Should Be @($Context.NuGetExe,'pack', 'abc.nuspec', '-NonInteractive', '-Output', '.', '-NoPackageAnalysis')
+        $capturedCalls[0] | %{$_} | Should Be @($Context.NuGetExe,'pack', 'abc.nuspec', '-NonInteractive', '-OutputDirectory', '.', '-NoPackageAnalysis')
     }
 
     It "It should call Nuget with specified parameters" {
@@ -79,7 +79,7 @@ Describe "Package-DeployableNuSpec" {
         Package-DeployableNuSpec 'my project.nuspec' -NoPackageAnalysis $false -NoDefaultExcludes $true -Version '3.2.1' -Output 'my folder'
 
         $capturedCalls.Count | Should Be 1
-        $capturedCalls[0] | %{$_} | Should Be @($Context.NuGetExe,'pack', 'my project.nuspec', '-NonInteractive', '-Output', 'my folder', '-NoDefaultExcludes', '-Version', '3.2.1')
+        $capturedCalls[0] | %{$_} | Should Be @($Context.NuGetExe,'pack', 'my project.nuspec', '-NonInteractive', '-OutputDirectory', 'my folder', '-NoDefaultExcludes', '-Version', '3.2.1')
     }
 	
 	It "It should pipe project paths" {
@@ -92,8 +92,8 @@ Describe "Package-DeployableNuSpec" {
         List-Projects | Package-DeployableNuSpec
 
         $capturedCalls.Count | Should Be 2        
-        $capturedCalls[0] | %{$_} | Should Be @($Context.NuGetExe,'pack', 'a.nuspec', '-NonInteractive', '-Output', '.', '-NoPackageAnalysis')
-		$capturedCalls[1] | %{$_} | Should Be @($Context.NuGetExe,'pack', 'b.nuspec', '-NonInteractive', '-Output', '.', '-NoPackageAnalysis')
+        $capturedCalls[0] | %{$_} | Should Be @($Context.NuGetExe,'pack', 'a.nuspec', '-NonInteractive', '-OutputDirectory', '.', '-NoPackageAnalysis')
+		$capturedCalls[1] | %{$_} | Should Be @($Context.NuGetExe,'pack', 'b.nuspec', '-NonInteractive', '-OutputDirectory', '.', '-NoPackageAnalysis')
     }
 }
 
