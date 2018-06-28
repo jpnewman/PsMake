@@ -217,7 +217,7 @@ function private:Build-Context()
 
 function private:Get-Version()
 {
-	return "3.1.7.0"
+	return "3.1.8"
 }
 
 function private:Load-MakeFile()
