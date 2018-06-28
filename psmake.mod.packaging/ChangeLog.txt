@@ -1,6 +1,11 @@
 PsMake Packaging Module
 ========================================
 
+Version 1.2.0.0
+----------------------------------------
+(Change) Nuget.exe pack command deprecated 'Output' argument to 'OutputDirectory'
+(Change) NuGet.exe versions to 4.6.2
+
 Version 1.1.0.0
 ----------------------------------------
 (Change) Package-VSProject: added Platform parameter with default: AnyCPU
