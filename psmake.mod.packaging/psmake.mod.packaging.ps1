@@ -48,7 +48,7 @@ function Package-VSProject
         [string]$Platform = "AnyCPU"
     )
     process {
-        $arguments = @("pack",$Project,"-Prop","Configuration=$Configuration","-Prop","Platform=$Platform","-NonInteractive","-Output",$Output)
+        $arguments = @("pack",$Project,"-Prop","Configuration=$Configuration","-Prop","Platform=$Platform","-NonInteractive","-OutputDirectory",$Output)
         if ($IncludeReferencedProjects) { $arguments += "-IncludeReferencedProjects"}
         if ($Symbols) { $arguments += "-Symbols" }
         if ($Version) { $arguments += "-Version"; $arguments += $Version; }
@@ -98,7 +98,7 @@ function Package-DeployableNuSpec
         [bool]$NoDefaultExcludes = $false
     )
     process {
-        $arguments = "pack",$Package,"-NonInteractive","-Output",$Output
+        $arguments = "pack",$Package,"-NonInteractive","-OutputDirectory",$Output
         if ($NoPackageAnalysis) { $arguments += "-NoPackageAnalysis"}
         if ($NoDefaultExcludes) { $arguments += "-NoDefaultExcludes"}
         if ($Version) { $arguments += "-Version"; $arguments += $Version; }
